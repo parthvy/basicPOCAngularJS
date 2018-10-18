@@ -1,77 +1,25 @@
-<html ng-app="ToDo">
-<body>
-<span>UserToDo</span>
-<p>User Application</p>
-<div ng-controller=toDoController>
-<div ng-if="create">
-<form name="toDoForm" ng-submit="addToDo()">
-Name : <input type="text" name="userName" ng-model="$parent.userName" required/>
-<br><br>
-ToDo : <input type="text" name="newtodo" ng-model="$parent.newtodo" required/>
-<br><br>
-<button ng-diabled="toDoForm.$invalid">Add</button>
- </form>
- <button ng-click="clearToDo()">Clear</button>
-</div>
- <div ng-if="edit">
-<form name="editForm">
-Name : <input type="text" name="userName1" ng-model=exisitngToDo.name required/>
-<br><br>
-ToDo : <input type="text" name="newtodo1" ng-model=exisitngToDo.todo required/>
-<br><br>
-<button ng-show="edit" ng-click="saveEdit()"onclick>Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button ng-show="edit" ng-click="deletetodo(exisitngToDo)"onclick>Delete</button>
- </form>
-</div>
- <ul>
- <li ng-repeat = "todo in todos">
- <input type="checkbox" ng-model="todo.done" />
- <span>{{todo.name}} : {{todo.todo}}</span> <button ng-click="editToDo(todo)">Edit</button>
- 
- </li>
- </ul>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script>
-angular.module('ToDo',[]).
-controller('toDoController',['$scope',function($scope){
-	$scope.create=true
-	$scope.todos = [
-	                {'name' : 'FName' ,'todo':'Do Something', 'done' : false}
-	                ];
-	$scope.addToDo = function(){
-		$scope.todos.push({'name':$scope.userName,'todo':$scope.newtodo,'done':false})
-		$scope.userName = ''
-		$scope.newtodo = ''
-	}
-	
-	$scope.clearToDo = function(){
-		$scope.todos = $scope.todos.filter(function(item){
-			return !item.done 
-				})
-	}
-	$scope.editToDo = function(todo){
-		$scope.edit=true;
-		$scope.create=false;
-		$scope.exisitngToDo = todo;
-		$scope.edit=true;
-	}
-	$scope.saveEdit = function()
-	{
-		$scope.exisitngToDo = {};
-		$scope.edit=false;
-		$scope.create=true;
-		
-	}
-	$scope.deletetodo = function(todo)
-	{
-		$scope.todos.splice($scope.todos.indexOf(todo),1);
-		$scope.edit=false;
-		$scope.create=true;
-		
-	}
-}])
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>User To-Do App</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+			rel="stylesheet">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+		<script type="text/javascript"
+			src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
+		<script src="app.js"></script>
+		<script src="controller/user-to-do-controller.js"></script>
+		<script src="controller/login-to-do-controller.js"></script>
+	</head>
 
-</script>
-</body>
+	<body ng-app="user-todo-app">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand mr-auto">User To-Dos</a>
+		</nav>
+		<div ui-view></div>
+	</body>
 </html>

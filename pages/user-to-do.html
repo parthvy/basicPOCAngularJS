@@ -1,0 +1,37 @@
+<div class="container">
+    <div>
+        <button style="float: right" ng-click="logout()">Logout</button>
+    </div>
+    <br><br>
+    <div ng-if="create">
+        <form name="toDoForm" ng-submit="addToDo()">
+		Name : <input type="text" name="userName" ng-model="$parent.userName" required/>
+		<br><br>
+		To-Do : <input type="text" name="newtodo" ng-model="$parent.newtodo" required/>
+		<br><br>
+		<button ng-disabled="toDoForm.$invalid">Add</button>
+ 		</form>
+ 		<button ng-click="clearToDo()">Clear</button>
+ 		<p></p>
+ 		<br><br>
+    </div>
+    <div ng-if="edit">
+                <form name="editForm">
+                Name : <input type="text" name="userName1" ng-model=exisitngToDo.name required/>
+                <br><br>
+                ToDo : <input type="text" name="newtodo1" ng-model=exisitngToDo.todo required/>
+                <br><br>
+                <button ng-show="edit" ng-click="saveEdit()">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button ng-show="edit" ng-click="deletetodo(exisitngToDo)">Delete</button>
+                </form>
+    </div>
+    <div>
+        <ul>
+            <li ng-repeat = "todo in todos">
+            <input type="checkbox" ng-model="todo.done" />
+            <span>{{todo.name}} : {{todo.todo}}</span> <button ng-click="editToDo(todo)">Edit</button>
+            </li>
+        </ul>
+        <br><br><br>
+    </div>
+</div>
