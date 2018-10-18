@@ -1,7 +1,7 @@
 app.controller('user-to-do-controller', function($scope, $rootScope, $localStorage, $window) {
 	$scope.create=true
 	$scope.todos = [
-	                {'name' : 'FName' ,'todo':'Do Something', 'done' : false}
+	                {'name' : 'Parth' ,'todo':'Make POC', 'done' : false}
 	                ];
 	
 	
